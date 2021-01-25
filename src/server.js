@@ -21,21 +21,21 @@ module.exports = async (io) => {
     games.to(socket.id).emit('RoomList', roomsOpen);
 
 
-    socket.on('CreateGame', (username)=>{
+    socket.on('CreateGame', (roomOwner)=>{
       const createGameHandler = require('./handler/createGame.js');
-      createGameHandler(games, socket, username, roomsOpen, currentUserImg );
+      createGameHandler(games, socket, roomOwner, roomsOpen, currentUserImg );
     })
 
 
-    socket.on('Join', (username)=>{
+    socket.on('Join', (roomOwner)=>{
       const join = require('./handler/join.js');
-      join(games, socket, username, roomsOpen, currentUserImg, currentUser);
+      join(games, socket, roomOwner, roomsOpen, currentUserImg, currentUser);
     })
 
 
-    socket.on('LeaveRoom', (username)=>{
+    socket.on('LeaveRoom', (roomOwner)=>{
       const leaveRoom = require('./handler/leaveRoom.js');
-      leaveRoom(games, socket, username, roomsOpen, currentUserImg, currentUser );
+      leaveRoom(games, socket, roomOwner, roomsOpen, currentUserImg, currentUser );
     })
 
     //before user left, update the room info
