@@ -1,19 +1,19 @@
 'use strict';
-module.exports = (games, socket, username, roomsOpen, currentUserImg ) =>{
-  socket.join(username);
+module.exports = (games, socket, roomOwner, roomsOpen, currentUserImg ) =>{
+  socket.join(roomOwner);
   // update the roomsOpen list (it's an obj, not array)
-  roomsOpen[username]={
-    roomOwner: username,
+  roomsOpen[roomOwner]={
+    roomOwner: roomOwner,
     numOfPlayers: 1,
     inGame: false,
     currentPlayers: [
       {
-        username: username,
+        username: roomOwner,
         profileImgUrl: currentUserImg,
         socketID: socket.id,
       }
     ]
   }
   // sends out updated room open list to everybody
-  games.emit('RoomList', roomsOpen);
+  games.emit('NewRoomCreated', roomsOpen[roomOwner]);
 }

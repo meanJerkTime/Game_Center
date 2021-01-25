@@ -4,7 +4,7 @@ module.exports =(games, socket, roomsOpen, currentUserImg, currentUser)=>{
   // socket.io stores info in a set, thus we have to access it in this way
 
   // we are using username as the room name.
-  console.log('rooms open before', roomsOpen)
+
   var username = [...socket.rooms.keys()][1];
 
   if (username && roomsOpen[username]) {
@@ -19,7 +19,7 @@ module.exports =(games, socket, roomsOpen, currentUserImg, currentUser)=>{
     if (roomsOpen[username].numOfPlayers <= 0) {
       delete roomsOpen[username];
     } else {
-      games.to(username).emit('LeftRoom', {username: currentUser, userImg: currentUserImg, message: ` ${currentUser} has left the room`})
+      games.to(username).emit('LeftRoom', {message: ` ${currentUser} has left the room`,roomStatus:roomsOpen[username] })
     }
   }
 }

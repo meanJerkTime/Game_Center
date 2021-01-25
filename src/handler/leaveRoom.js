@@ -1,14 +1,14 @@
 'use strict';
-module.exports = (games, socket, username, roomsOpen, currentUserImg, currentUser ) =>{
+module.exports = (games, socket, roomOwner, roomsOpen, currentUserImg, currentUser ) =>{
   try {
-    socket.leave(username);
+    socket.leave(roomOwner);
 
-    roomsOpen[username] = {
-      ...roomsOpen[username],
-      numOfPlayers: roomsOpen[username].numOfPlayers - 1,
-      currentPlayers: roomsOpen[username].currentPlayers.filter((player)=> player.username != currentUser),
+    roomsOpen[roomOwner] = {
+      ...roomsOpen[roomOwner],
+      numOfPlayers: roomsOpen[roomOwner].numOfPlayers - 1,
+      currentPlayers: roomsOpen[roomOwner].currentPlayers.filter((player)=> player.username != currentUser),
     }
-    games.to(username).emit('LeftRoom', {username: currentUser, userImg: currentUserImg, message: ` ${currentUser} has left the room`})
+    games.to(roomOwner).emit('LeftRoom', {message: ` ${currentUser} has left the room`,roomStatus:roomsOpen[roomOwner] })
   }
   catch (err) {
     console.log(err);

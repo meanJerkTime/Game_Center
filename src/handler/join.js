@@ -1,18 +1,18 @@
 'use strict';
-module.exports = (games, socket, username, roomsOpen, currentUserImg, currentUser ) =>{
+module.exports = (games, socket, roomOwner, roomsOpen, currentUserImg, currentUser ) =>{
 
   // check whether the room exsit
-  if (roomsOpen[username]){
+  if (roomsOpen[roomOwner]){
     // check whether the room has less than 6 people
-    if (roomsOpen[username].numOfPlayers < 6) {
+    if (roomsOpen[roomOwner].numOfPlayers < 6) {
       try {
 
-        socket.join(username);
-        roomsOpen[username] = {
-          ...roomsOpen[username],
-          numOfPlayers: roomsOpen[username].numOfPlayers + 1,
+        socket.join(roomOwner);
+        roomsOpen[roomOwner] = {
+          ...roomsOpen[roomOwner],
+          numOfPlayers: roomsOpen[roomOwner].numOfPlayers + 1,
           currentPlayers: [
-            ...roomsOpen[username].currentPlayers,
+            ...roomsOpen[roomOwner].currentPlayers,
             {
               username: currentUser,
               profileImgUrl: currentUserImg,
@@ -21,7 +21,7 @@ module.exports = (games, socket, username, roomsOpen, currentUserImg, currentUse
           ]
         }
 
-        games.to(username).emit('NewJoin', {username: currentUser, userImg: currentUserImg, message: `New user ${currentUser} just joined the room`});
+        games.to(roomOwner).emit('NewJoin', {message: `New player ${currentUser} just joined the room`, roomStatus:roomsOpen[roomOwner]});
 
       }
       catch (err) {
