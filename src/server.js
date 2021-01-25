@@ -1,6 +1,5 @@
 'use strict';
 require('dotenv').config();
-const axios = require('axios');
 
 // customer event will start with capital letter, camel case style. Build in event will stay with lower case
 
@@ -21,22 +20,22 @@ module.exports = async (io) => {
     games.to(socket.id).emit('RoomList', roomsOpen);
 
 
-    socket.on('CreateGame', (roomOwner)=>{
-      const createGameHandler = require('./handler/createGame.js');
+    socket.on('CreateRoom', (roomOwner)=>{
+      const createGameHandler = require('./handler/createRoom.js');
       createGameHandler(games, socket, roomOwner, roomsOpen, currentUserImg );
-    })
+    });
 
 
     socket.on('Join', (roomOwner)=>{
       const join = require('./handler/join.js');
       join(games, socket, roomOwner, roomsOpen, currentUserImg, currentUser);
-    })
+    });
 
 
     socket.on('LeaveRoom', (roomOwner)=>{
       const leaveRoom = require('./handler/leaveRoom.js');
       leaveRoom(games, socket, roomOwner, roomsOpen, currentUserImg, currentUser );
-    })
+    });
 
     //before user left, update the room info
     socket.on('disconnecting', ()=>{
@@ -45,11 +44,11 @@ module.exports = async (io) => {
     });
 
 
-    socket.on('StartGame', async (payload)=>{
-      const startGame = require('./handler/startGame.js');
-      startGame(games, payload, roomsOpen, roomsIngame);
-    })
+    socket.on('InitGame', async (payload)=>{
+      const initGame = require('./handler/initGame.js');
+      initGame(games, payload, roomsOpen, roomsIngame);
+    });
 
-  })
+  });
 
-}
+};

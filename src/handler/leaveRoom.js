@@ -7,10 +7,10 @@ module.exports = (games, socket, roomOwner, roomsOpen, currentUserImg, currentUs
       ...roomsOpen[roomOwner],
       numOfPlayers: roomsOpen[roomOwner].numOfPlayers - 1,
       currentPlayers: roomsOpen[roomOwner].currentPlayers.filter((player)=> player.username != currentUser),
-    }
-    games.to(roomOwner).emit('LeftRoom', {message: ` ${currentUser} has left the room`,roomStatus:roomsOpen[roomOwner] })
+    };
+    games.to(roomOwner).emit('LeftRoom', {message: ` ${currentUser} has left the room`,roomStatus:roomsOpen[roomOwner] });
   }
   catch (err) {
     console.log(err);
   }
-}
+};

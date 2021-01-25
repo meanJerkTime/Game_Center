@@ -13,14 +13,14 @@ module.exports =(games, socket, roomsOpen, currentUserImg, currentUser)=>{
       ...roomsOpen[username],
       numOfPlayers: roomsOpen[username].numOfPlayers - 1,
       currentPlayers: roomsOpen[username].currentPlayers.filter((player)=> player.username != currentUser),
-    }
+    };
 
 
     if (roomsOpen[username].numOfPlayers <= 0) {
       delete roomsOpen[username];
     } else {
-      games.to(username).emit('LeftRoom', {message: ` ${currentUser} has left the room`,roomStatus:roomsOpen[username] })
+      games.to(username).emit('LeftRoom', {message: ` ${currentUser} has left the room`,roomStatus:roomsOpen[username] });
     }
   }
-}
+};
 
