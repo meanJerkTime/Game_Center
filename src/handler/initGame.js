@@ -9,9 +9,8 @@ module.exports = async (games, payload, roomsOpen, roomsIngame)=>{
   const doorCards = doorCardsData.data;
 
   const treasureCardsData = await axios.get(process.env.TREASURE_CARD_URL);
-  // const treasureCards = treasureCardsData.data
-  // const doorCards = [1,2,3];
-  const treasureCards = [1,2,3,4,5,6,7,8,9,0,11,22,33,44,55];
+  const treasureCards = treasureCardsData.data;
+  // const treasureCards = [1,2,3,4,5,6,7,8,9,0,11,22,33,44,55];
 
   // do the logic to seperate cards and update the game state.
 
@@ -46,10 +45,10 @@ module.exports = async (games, payload, roomsOpen, roomsIngame)=>{
       cardsEquipped: {
         headGear: null,
         footGear: null,
-        weapon: []
+        weapon: [],
       },
-    }
-  })
+    };
+  });
   // add whatever left in treasure card deck to the game state
   gameState['treasureCardDeck'] = treasureCards;
 
@@ -64,10 +63,10 @@ module.exports = async (games, payload, roomsOpen, roomsIngame)=>{
     ...roomsIngame[roomOwner],
     inGame: true,
     gameState,
-  }
+  };
 
   // send out Initial Cards
-  games.to(roomOwner).emit("InitialCards", gameState);
-  console.log(treasureCards)
+  games.to(roomOwner).emit('InitialCards', gameState);
+  console.log(treasureCards);
   console.log(gameState);
-}
+};

@@ -17,9 +17,9 @@ module.exports = (games, socket, roomOwner, roomsOpen, currentUserImg, currentUs
               username: currentUser,
               profileImgUrl: currentUserImg,
               socketID: socket.id,
-            }
-          ]
-        }
+            },
+          ],
+        };
 
         games.to(roomOwner).emit('NewJoin', {message: `New player ${currentUser} just joined the room`, roomStatus:roomsOpen[roomOwner]});
 
@@ -33,4 +33,4 @@ module.exports = (games, socket, roomOwner, roomsOpen, currentUserImg, currentUs
   } else {
     games.to(socket.id).emit('JoinErr', 'The room is currently unavailable');
   }
-}
+};
