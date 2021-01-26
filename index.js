@@ -1,7 +1,12 @@
 'use strict';
 require('dotenv').config();
 
-const io = require('socket.io')(process.env.PORT);
+const io = require('socket.io')(process.env.PORT, {
+  cors: {
+    origin:'localhost:3000',
+    methods: ['GET', 'POST']
+  }
+});
 
 require('./src/server.js')(io);
 
