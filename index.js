@@ -1,5 +1,6 @@
 'use strict';
 require('dotenv').config();
+require('cors');
 
 const io = require('socket.io')(process.env.PORT, {
   cors: {
