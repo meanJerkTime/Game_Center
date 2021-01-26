@@ -49,6 +49,28 @@ module.exports = async (io) => {
       initGame(games, payload, roomsOpen, roomsIngame);
     });
 
-  });
 
+    socket.on('UpdateGameStateAndTurn', (gameState)=>{
+      const updateGameStateAndTurn = require('./handler/updateGameStateAndTurn.js');
+      updateGameStateAndTurn(games, gameState,roomsIngame );
+    });
+
+
+    socket.on('GameOver', (payload)=>{
+      const winner = payload.winner;
+      const roomOwner = payload.roomOwner;
+
+      games.emit('Winner', winner);
+
+      // get rid of game state
+      delete roomsIngame[roomOwner].gameState;
+
+      // move the room from in game to open
+      roomsOpen[roomOwner] = {...roomsIngame[roomOwner], inGame: false};
+
+      // get rid of game room in roomsIngame
+      delete roomsIngame[roomOwner];
+
+    });
+  });
 };
