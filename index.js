@@ -6,9 +6,7 @@ app.use(cors());
 
 const io = require('socket.io')(process.env.PORT, {
   cors: {
-    origin:'http://localhost:3000',
-    methods: ['GET', 'POST'],
-    credentials:true,
+    origin:false,
   }
 });
 
