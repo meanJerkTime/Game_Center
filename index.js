@@ -6,7 +6,8 @@ app.use(cors());
 
 const io = require('socket.io')(process.env.PORT, {
   cors: {
-    origin:false,
+    origin:'*',
+    methods: ['GET', 'POST'],
   }
 });
 
