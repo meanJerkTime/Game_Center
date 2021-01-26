@@ -6,8 +6,8 @@ const axios = require('axios');
 
 module.exports = async (io) => {
 
-  let roomsOpen = {};
-  let roomsIngame = {};
+  let roomsOpen = [];
+  let roomsIngame = [];
 
   // namespace for games
   const games = io.of('/games');
