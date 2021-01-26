@@ -3,7 +3,7 @@ require('dotenv').config();
 
 const io = require('socket.io')(process.env.PORT, {
   cors: {
-    origin:'localhost:3000',
+    origin:'localhost:3000/playerHub',
     methods: ['GET', 'POST']
   }
 });
