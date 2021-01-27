@@ -1,20 +1,24 @@
 'use strict';
 require('dotenv').config();
+const express = require('express'),
+  app = express(),
+  server = require('http').createServer(app);
+// io = require('socket.io').listen(server),
 
-const io = require('socket.io')(process.env.PORT, {
+const io = require('socket.io')(server, {
   cors: {
     origin:'*',
-    methods: ['GET', 'POST'],
-    handlePreflightRequest: (req, res) => {
-      res.writeHead(200, {
-        "Access-Control-Allow-Origin": '*',
-        // "Access-Control-Allow-Methods": "GET,POST",
-        // "Access-Control-Allow-Headers": "my-custom-header",
-        "Access-Control-Allow-Credentials": true
-      });
-      res.end();
-    }
-  }
+    // methods: ['GET', 'POST'],
+    // handlePreflightRequest: (req, res) => {
+    //   res.writeHead(200, {
+    //     'Access-Control-Allow-Origin': '*',
+    //     // "Access-Control-Allow-Methods": "GET,POST",
+    //     // "Access-Control-Allow-Headers": "my-custom-header",
+    //     'Access-Control-Allow-Credentials': true,
+    //   });
+    //   res.end();
+    // },
+  },
 });
 
 require('./src/server.js')(io);
@@ -26,5 +30,6 @@ io.on('connection', (socket) => {
 
 });
 
+server.listen(process.env.PORT);
 
 
