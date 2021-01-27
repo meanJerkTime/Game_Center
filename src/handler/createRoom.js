@@ -15,5 +15,5 @@ module.exports = (games, socket, roomOwner, roomsOpen, currentUserImg ) =>{
     ],
   };
   // sends out updated room open list to everybody
-  games.emit('NewRoomCreated', roomsOpen[roomOwner]);
+  games.emit('NewRoomCreated', roomsOpen);
 };
