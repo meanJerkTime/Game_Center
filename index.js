@@ -7,7 +7,7 @@ const express = require('express'),
 
 const io = require('socket.io')(server, {
   cors: {
-    origin:'*',
+    origin:false,
     // methods: ['GET', 'POST'],
     // handlePreflightRequest: (req, res) => {
     //   res.writeHead(200, {
