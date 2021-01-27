@@ -14,7 +14,9 @@ module.exports = async (io) => {
   games.on('connection', (socket)=>{
 
     // get the current socket user info
-    const [currentUser,currentUserImg ] = socket.handshake.query.user.split('---');
+    // const [currentUser,currentUserImg ] = socket.handshake.query.user.split('---');
+    const currentUserImg = "";
+    const currentUser = socket.handshake.query.user;
 
     // send this user the open room info
     games.to(socket.id).emit('RoomList', roomsOpen);
