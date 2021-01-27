@@ -21,6 +21,7 @@ module.exports =(games, socket, roomsOpen, currentUserImg, currentUser)=>{
     } else {
       games.to(username).emit('LeftRoom', {message: ` ${currentUser} has left the room`,roomStatus:roomsOpen[username] });
     }
+    games.emit('NewRoomCreated', roomsOpen);
   }
 };
 
