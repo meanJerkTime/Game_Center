@@ -7,12 +7,12 @@ module.exports = async (games, payload, roomsOpen, roomsIngame)=>{
 
   // get the cards from server
   const doorCardsData = await axios.get(process.env.DOOR_CARD_URL);
-  // const doorCards = doorCardsData.data;
-  const doorCards = [99,88,77,66,55,44,33,22,11];
+  const doorCards = doorCardsData.data;
+  // const doorCards = [99,88,77,66,55,44,33,22,11];
 
   const treasureCardsData = await axios.get(process.env.TREASURE_CARD_URL);
-  // const treasureCards = treasureCardsData.data;
-  const treasureCards = [1,2,3,4,5,6,7,8,9,0,11,22,33,44,55];
+  const treasureCards = treasureCardsData.data;
+  // const treasureCards = [1,2,3,4,5,6,7,8,9,0,11,22,33,44,55];
 
   // do the logic to seperate cards and update the game state.
 
