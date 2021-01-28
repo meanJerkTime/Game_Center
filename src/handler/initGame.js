@@ -43,10 +43,12 @@ module.exports = async (games, payload, roomsOpen, roomsIngame)=>{
     gameState[player.username] = {
       userName: player.username,
       level: 1,
+      combatStrength:0,
       cardsInHand: selectedCard,
       cardsEquipped: {
         headGear: null,
         footGear: null,
+        armor:null,
         weapon: [],
       },
     };
