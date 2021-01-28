@@ -52,11 +52,15 @@ module.exports = async (io) => {
     });
 
 
-    socket.on('UpdateGameStateAndTurn', (gameState)=>{
-      const updateGameStateAndTurn = require('./handler/updateGameStateAndTurn.js');
-      updateGameStateAndTurn(games, gameState,roomsIngame );
+    socket.on('nextTurn', (gameState)=>{
+      const nextTurn = require('./handler/nextTurn.js');
+      nextTurn(games, gameState,roomsIngame );
     });
 
+    socket.on('updateState', (gameState)=>{
+      games.to(gameState.roomId).emit('UpdateLocalGameState', gameState);
+    });
+    
 
     socket.on('GameOver', (payload)=>{
       const winner = payload.winner;
