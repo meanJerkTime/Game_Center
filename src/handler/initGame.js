@@ -45,12 +45,7 @@ module.exports = async (games, payload, roomsOpen, roomsIngame)=>{
       level: 1,
       combatStrength:0,
       cardsInHand: selectedCard,
-      cardsEquipped: {
-        headGear: null,
-        footGear: null,
-        armor:null,
-        weapon: [],
-      },
+      cardsEquipped: [],
     };
   });
   // add whatever left in treasure card deck to the game state
