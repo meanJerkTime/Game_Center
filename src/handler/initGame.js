@@ -38,12 +38,12 @@ module.exports = async (games, payload, roomsOpen, roomsIngame)=>{
   };
 
   players.forEach((player)=>{
-    let selectedCard = cardRandomizer(treasureCards, 2);
+    let selectedCard = cardRandomizer(treasureCards, 3);
 
     gameState[player.username] = {
       userName: player.username,
       level: 1,
-      combatStrength:10,
+      combatStrength:15,
       cardsInHand: selectedCard,
       cardsEquipped: [],
     };
