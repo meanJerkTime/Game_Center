@@ -53,6 +53,7 @@ module.exports = async (io) => {
 
 
     socket.on('nextTurn', (gameState)=>{
+      console.log(gameState);
       const nextTurn = require('./handler/nextTurn.js');
       nextTurn(games, gameState,roomsIngame );
     });
